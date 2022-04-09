@@ -19,6 +19,7 @@ export class MTest {
   @Column("timestamp without time zone", {
     name: "create_datetime",
     nullable: true,
+    default: () => 'NOW()'
   })
   createDatetime: Date | null;
 
@@ -32,6 +33,7 @@ export class MTest {
   @Column("timestamp without time zone", {
     name: "update_datetime",
     nullable: true,
+    default: () => 'NOW()'
   })
   updateDatetime: Date | null;
 

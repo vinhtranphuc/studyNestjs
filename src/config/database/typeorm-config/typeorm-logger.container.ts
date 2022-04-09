@@ -1,7 +1,7 @@
 import { Logger as TypeOrmLogger, QueryRunner } from "typeorm";
 import { LoggerOptions as TypeOrmLoggerOptions } from "typeorm/logger/LoggerOptions";
 import { Logger } from "@nestjs/common";
-import { format } from 'sql-formatter';
+import { format } from "sql-formatter";
 
 /**
  * Effectively ripped out from:
@@ -27,7 +27,7 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
       this._options === true ||
       (this._options instanceof Array && this._options.indexOf("query") !== -1)
     ) {
-        this.logSql("QUERY",query,parameters);
+      this.logSql("QUERY", query, parameters);
     }
   }
 
@@ -45,7 +45,7 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
       this._options === true ||
       (this._options instanceof Array && this._options.indexOf("error") !== -1)
     ) {
-      this.logSql("QUERY FAILED",query,parameters);
+      this.logSql("QUERY FAILED", query, parameters);
       this._logger.log(`error:`, error);
     }
   }
@@ -59,7 +59,7 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
     parameters?: any[],
     queryRunner?: QueryRunner,
   ) {
-    this.logSql("QUERY IS SLOW",query,parameters);
+    this.logSql("QUERY IS SLOW", query, parameters);
     this._logger.log(`execution time: ` + time);
   }
 
@@ -129,7 +129,7 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
   }
 
   private logSql(queryName: string, query: string, parameters: any[]) {
-    let logParams = [...parameters];
+    let logParams = parameters?[...parameters]:[];
     logParams.unshift("first");
     this._logger.log("\n -- PARAMETERS: " + this.stringifyParams(parameters))
     this._logger.log("\n --"+queryName+"" + ": \n" + format(query,{
