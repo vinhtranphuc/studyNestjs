@@ -1,9 +1,7 @@
 import { Global, Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmConfigModule } from "./typeorm-config/typeorm-config.module";
 import { DefaultTypeOrmConfigService } from "./typeorm-config/default-typeorm-config.service";
-
 @Global()
 @Module({
   imports: [
@@ -27,7 +25,7 @@ import { DefaultTypeOrmConfigService } from "./typeorm-config/default-typeorm-co
     TypeOrmModule.forRootAsync({
       imports: [TypeOrmConfigModule],
       name: DefaultTypeOrmConfigService.connectionName,
-      useExisting: DefaultTypeOrmConfigService,
+      useExisting: DefaultTypeOrmConfigService
     }),
   ],
 })

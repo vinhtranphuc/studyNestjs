@@ -6,6 +6,7 @@ import { IS_PUBLIC_HEALTHY_KEY, IS_PUBLIC_KEY } from '../decorators/public.decor
 
 @Injectable()
 export class SessionGuard implements CanActivate {
+
     constructor(private redisService: RedisService, private reflector: Reflector) { }
 
     async canActivate(context: ExecutionContext) {

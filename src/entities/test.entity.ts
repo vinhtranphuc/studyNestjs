@@ -1,8 +1,9 @@
 import { Column, Entity, Index } from "typeorm";
 
-@Index("m_test_pkey", ["id"], { unique: false })
-@Entity("m_test", { schema: "public" })
-export class MTest {
+@Index("test_pkey", ["name"], { unique: false })
+@Entity("test", { schema: "public" })
+export class TestEntity {
+
   @Column("integer", { primary: true, name: "id" })
   id: number;
 

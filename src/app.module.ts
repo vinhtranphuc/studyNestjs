@@ -9,6 +9,10 @@ import { LoggingInterceptor } from "./common/helpers/logging.interceptor";
 import { MailModule } from "./mail/mail.module";
 import { RedisCacheModule } from "./redis/redis.module";
 import { LearnModule } from "./module/learn.module";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtAuthGuard } from "./common/jwt/jwt-auth.guard";
+import { RolesGuard } from "./common/role/role.guard";
+import { SessionGuard } from "./common/role/redis.guard";
 
 @Module({
   imports: [
@@ -27,18 +31,18 @@ import { LearnModule } from "./module/learn.module";
   controllers: [AppController],
   providers: [
     AppService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: RolesGuard,
-    // },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: SessionGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: SessionGuard,
+    },
   ],
 })
 export class AppModule implements NestModule {

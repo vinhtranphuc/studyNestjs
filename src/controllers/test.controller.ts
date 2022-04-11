@@ -3,12 +3,12 @@ import { ApiTags } from "@nestjs/swagger";
 import { TestDTO } from "src/dto/test.dto";
 import { LearnService } from "src/services/learn.service";
 
-@Controller("learn")
-@ApiTags("LearnController")
-export class LearnController {
+@Controller("test")
+@ApiTags("TestController")
+export class TestController {
   constructor(private readonly mLearnService: LearnService) {}
 
-  @Get("getList")
+  @Get("list")
   async getList() {
     return await this.mLearnService.findAll();
   }
@@ -19,14 +19,14 @@ export class LearnController {
     return list;
   }
 
-  @Post("saveTest")
-  async saveTest(@Body() testDto: TestDTO) {
+  @Post("save")
+  async save(@Body() testDto: TestDTO) {
     const result = await this.mLearnService.saveTest(testDto);
     return result;
   }
 
-  @Post("updateTest")
-  async updateTest(@Body() testDto: TestDTO) {
+  @Post("update")
+  async update(@Body() testDto: TestDTO) {
     const result = await this.mLearnService.updateTest(testDto);
     return result;
   }

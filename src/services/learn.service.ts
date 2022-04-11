@@ -1,16 +1,14 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TestDTO } from "src/dto/test.dto";
-import { MTest } from "src/entities/MTest";
-import { LessThan, Repository } from "typeorm";
-import { entityName } from "typeorm-model-generator/dist/src/NamingStrategy";
-
+import { TestEntity } from "src/entities/test.entity";
+import { Repository } from "typeorm";
 @Injectable()
 export class LearnService {
  
   constructor(
-    @InjectRepository(MTest)
-    private serviceRep: Repository<MTest>,
+    @InjectRepository(TestEntity)
+    private serviceRep: Repository<TestEntity>,
   ) {}
 
   async findAll() {
@@ -27,8 +25,8 @@ export class LearnService {
     });
   }
 
-  async saveTest(testDto: TestDTO): Promise<MTest> {
-    let testEntity: MTest = new MTest();
+  async saveTest(testDto: TestDTO): Promise<TestEntity> {
+    let testEntity: TestEntity = new TestEntity();
     testEntity.id = testDto.id;
     testEntity.delFlg = false;
     testEntity.name = testDto.name;
@@ -39,7 +37,7 @@ export class LearnService {
   }
 
   async updateTest(testId: TestDTO) {
-    let testEntity : MTest = await this.serviceRep.findOne({
+    let testEntity : TestEntity = await this.serviceRep.findOne({
       where: {
         id:testId.id
       }
