@@ -8,7 +8,7 @@ import { NestModule } from "@nestjs/common";
 import { LoggingInterceptor } from "./common/helpers/logging.interceptor";
 import { MailModule } from "./mail/mail.module";
 import { RedisCacheModule } from "./redis/redis.module";
-import { LearnModule } from "./module/learn.module";
+import { LearnModule } from "./module/test.module";
 import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./common/jwt/jwt-auth.guard";
 import { RolesGuard } from "./common/role/role.guard";
